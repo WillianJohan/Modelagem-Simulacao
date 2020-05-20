@@ -16,8 +16,23 @@ public class Cell : MonoBehaviour
 
     public void updateStatus(int vizinhosVivos)
     {
+        if (vizinhosVivos == 0) adormecer();
         if (vizinhosVivos == 1 || vizinhosVivos == 2) nascer();
         if (vizinhosVivos == 3 || vizinhosVivos == 4) morrer();
+    }
+
+    public void setNextStatus()
+    {
+        float nextEstado = ((int)estado + 1) % 3;
+        estado = (Estado)nextEstado;
+        updateSprite();
+    }
+
+    public void adormecer()
+    {
+        if (estado == Estado.adormecida) return;
+        estado = Estado.adormecida;
+        updateSprite();
     }
 
     public void nascer()
@@ -39,5 +54,4 @@ public class Cell : MonoBehaviour
         SpriteRenderer myRender = GetComponent<SpriteRenderer>();
         myRender.sprite = sprite_De_Estados[(int)estado];
     }
-
 }

@@ -45,6 +45,7 @@ public class Grid : MonoBehaviour
     
     public void runNextGeneration()
     {
+        List<Cell> cellWhoCanSleep = new List<Cell>();
         List<Cell> cellWhoCanBorn = new List<Cell>();
         List<Cell> cellWhoCanDie = new List<Cell>();
 
@@ -53,11 +54,13 @@ public class Grid : MonoBehaviour
             {
                 if (celulas[x, y].estado == Cell.Estado.morta) continue;
                 int count = getCountOfAlives(getVizinhos(new Vector2Int(x, y)));
+                if (count == 0) cellWhoCanSleep.Add(celulas[x, y]);
                 if (count == 1 || count == 2) cellWhoCanBorn.Add(celulas[x, y]);
-                if (count == 3 || count == 4) cellWhoCanDie.Add(celulas[x, y]);
+                if (count >= 3) cellWhoCanDie.Add(celulas[x, y]);
             }
         }
 
+        foreach (Cell cell in cellWhoCanSleep) cell.adormecer();
         foreach (Cell cell in cellWhoCanBorn) cell.nascer();
         foreach (Cell cell in cellWhoCanDie) cell.morrer();
     }
