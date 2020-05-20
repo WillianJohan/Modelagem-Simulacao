@@ -52,11 +52,11 @@ public class Grid : MonoBehaviour
         for (int x = 0; x < celulas.GetLength(0); x++) {
             for (int y = 0; y < celulas.GetLength(1); y++)
             {
-                if (celulas[x, y].estado == Cell.Estado.morta) continue;
+                //if (celulas[x, y].estado == Cell.Estado.morta) continue;
                 int count = getCountOfAlives(getVizinhos(new Vector2Int(x, y)));
-                if (count == 0) cellWhoCanSleep.Add(celulas[x, y]);
-                if (count == 1 || count == 2) cellWhoCanBorn.Add(celulas[x, y]);
-                if (count >= 3) cellWhoCanDie.Add(celulas[x, y]);
+                if (count == 0)                 cellWhoCanSleep.Add(celulas[x, y]);
+                if (count == 1 || count == 2)   cellWhoCanBorn.Add(celulas[x, y]);
+                if (count >= 3)                 cellWhoCanDie.Add(celulas[x, y]);
             }
         }
 

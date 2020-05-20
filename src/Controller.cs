@@ -16,12 +16,13 @@ public class Controller : MonoBehaviour
     private bool inSimulation = false;
 
     //TIMER
-    private float waitTime = .5f;
+    private float waitTime = .3f;
     private float timer;
     
     [Header("[UI Components] Slider")]
     public Slider slider_XGridSize;
     public Slider slider_YGridSize;
+    public Slider slider_Velocity;
 
     [Header("[UI Components] Text")]
     public Text slider_Xtext;
@@ -44,8 +45,10 @@ public class Controller : MonoBehaviour
         nextGen_Button.interactable = false;
         generationCount = 0;
 
-        //Chamado de métodos.
+        //Setando valores em tela
         updateGenerationText();
+        updateSliderValueXText();
+        updateSliderValueYText();
         playPause(false);
     }
 
@@ -100,6 +103,11 @@ public class Controller : MonoBehaviour
             generationCount++;
             updateGenerationText();
         }
+    }
+
+    public void changeVelocity()
+    {
+        waitTime = slider_Velocity.value;
     }
 
     public void playPause()
